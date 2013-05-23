@@ -22,14 +22,20 @@ div {
     font-style: normal;
 }
 
+@font-face {
+    font-family:'Cabin';
+    src: url("font/Cabin-SemiBoldItalic.ttf");
+    font-style: italic;
+}
+
+@line-height: 22px;
 
 body {
     font-family:'Cabin';
     font-size: 19px;
     padding: 12px;
     letter-spacing: 0.5px;
-    word-spacing: 1px;
-    line-height: 22px;
+    line-height: @line-height;
 }
 
 p {
@@ -50,23 +56,38 @@ h1 {
     font-weight: normal;
     letter-spacing:3px;
     font-size: 16px;
-    line-height: 20px;
+    line-height: @line-height;
 }
 
 h2 {
     font-family:'Cabin';
     font-weight: normal;
-    margin-left: 130px;
+    margin-left: 30px;
     letter-spacing:3px;
     font-size: 16px;
-    line-height: 20px;
+    line-height: @line-height;
+}
+
+//dates CV:
+h4 {
+    font-family:'Cabin';
+    font-weight: normal;
+//    margin-left: 30px;
+    letter-spacing:3px;
+    font-size: 16px;
+    line-height: @line-height;
+}
+
+a {
+    border-bottom: 2px solid yellow; 
+    line-height: 16px;
 }
 
 .underlined {
     display: inline-block;
     border-bottom: 2px solid cyan; 
     font-size: 16px; 
-    line-height: 14px; 
+    line-height: @line-height; 
 }
 
 .background {
@@ -76,40 +97,99 @@ h2 {
     z-index: -111;
 }
 
-@col: 430px;
+/* COLUMNS LAYOUT */
+
+
+@col: 350px;
 @ext-margin: 10px;
-@gutter: 25px;
+@gutter: 15px;
 
 
 .white-box {
     background-color: white;
-    width: 7*@col + 2*@ext-margin;
-    height: 850px;
-    margin-top: 80px;
-    margin-left:100px;
+    width: 9*@col + 2*@ext-margin;
     padding: @ext-margin;
+}
+
+.col1 {
+    width: @col+5px;
+    padding: @gutter;
+    float: left;
+}
+
+.col2 {
+    width: 2*@col+15px;
+    float: left;
+    padding-top: @gutter;
+}
+
+.col3 {
+    width: 560px;
+    float: left;
+    padding-top: @gutter;
+    padding-left: 2*@gutter;
+}
+
+// (images)
+.col4 {
+    width: 4*@col+15px;
+    float: left;
+    padding-top: @gutter;
 }
 
 .box-in-box {
-    width: 430px;
-    float: left;
-    padding: @gutter;
+    display: inline-block;
 }
 
-.big-box-in-box {
-    width: 860px;
-    float: left;
-    padding: @gutter;
-    clear: both;
+.biox {
 }
 
-.cv-box {
-    background-color: white;
-    width: 2*@col + 2*@ext-margin;
-    height: 850px;
-    margin-top: 80px;
-    margin-left:100px;
-    padding: @ext-margin;
+.IM {
+    margin-left: -@gutter;
+    margin-top: 5px;
+    margin-bottom:-@gutter;
+    display: inline-block;
 }
 
+/*only on the screen*/
 
+@media screen {
+    .print-only {
+        display:none;
+    }
+    .columns {
+        clear: both;
+        column-count: 2;
+        -moz-column-count: 2;
+        -webkit-column-count: 2;
+        column-gap: 15px;
+        -moz-column-gap: 15px;
+        -webkit-column-gap: 15px;
+    }
+    // only boxes in the CV:
+    .box {
+    width: @col;
+    padding-left: 2*@gutter;
+    padding-bottom: 1.5*@line-height;
+    display: inline-block;
+}
+
+}
+
+/*only in print*/
+
+@media print {
+    .screen-only {
+        display:none;
+    }
+    .box {
+    width: 1.8*@col;
+    padding-left: 4*@gutter;
+    padding-bottom: 1.5*@line-height;
+    display: inline-block;
+    }
+    /*page break*/
+    .break {
+        page-break-before: always;
+    }
+}

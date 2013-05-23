@@ -59,12 +59,12 @@ var isExternal = function(href) {
         // une fois que toute la structure de la page est là: action
         $(document).ready(function() {
             
-            $(window).load(function() {
+/*            $(window).load(function() {
                 $('#container.detailed').masonry({
                     itemSelector: '.box',
                     columnWidth: 254,
                 });
-            });
+    });  */
 
             // action: si c'est externe, on attribue à "ça" une target pour le lien qui est un nouvel onglet
              $("a[href]").each(
@@ -75,13 +75,64 @@ var isExternal = function(href) {
              }
              );
              
-             $('a').smoothScroll();
+//             $('a').smoothScroll();
 
-
-
+            // to change the title on the bar
+            document.title = "Welcome, this is";
+            
+            // checkboxes
+            $('.box, .biox').hide();
+            $("input").each(function() {
+                var $this = $(this);
+                $this.hide();
+                if($this.prop("checked")) {
+                    var $image = $("<img src='/checkbox-crossed.png' />").insertAfter(this);
+                } else {
+                    var $image = $("<img src='/checkbox.png' />").insertAfter(this);
+                }
+                $image.bind("click", function() {
+                    var $checkbox = $(this).prev("input");
+                    var cat = $checkbox.val();
+                    $checkbox.prop("checked", !$checkbox.prop("checked"));    
+                    checkImage(cat);
+                })
+                function checkImage(cat) {
+                    if($image.prev("input").prop("checked")) {
+                        $image.attr("src", "/checkbox-crossed.png");
+                        $('.' + cat).fadeIn();
+                    } else {
+                        $image.attr("src", "/checkbox.png");
+                        $('.' + cat).fadeOut(function() {
+        });
+                    }
+                }
+                
+            });
+            
+            // images CV
+/*              var $imageCV = $(".IM");
+                $imageCV.width('70px');
+                $imageCV.click(function(){
+                    var imageCV = $imageCV.width === '70px';
+                    var newimageCV = (imageCV) ? "340px": "70px";
+                    $imageCV.width(newimageCV);
+                });
+*/
+/*
+                var $imageCV = $(".IM");
+                $imageCV.width('70px');
+                $(".IM").mouseenter(function(){
+                    $(this).width("340px");
+                });
+                $(".IM").mouseleave(function(){
+                    $(this).width("70px");
+                });
+*/
 // écrire les trucs ici!! on est encore dans document ready
         });
 
     });
 
 }
+
+
