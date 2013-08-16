@@ -9,13 +9,6 @@ div {
     box-sizing: border-box;
 }
 
-
-@font-face {
-    font-family:'PT-Serif';
-    src: url("font/PT_Serif-Caption-Web-Regular.ttf");
-    font-style: normal;
-}
-
 @font-face {
     font-family:'Cabin';
     src: url("font/Cabin-SemiBold.ttf");
@@ -28,11 +21,12 @@ div {
     font-style: italic;
 }
 
-@line-height: 22px;
+@factor: 0.9;
+@line-height: 23px*@factor;
 
 body {
     font-family:'Cabin';
-    font-size: 19px;
+    font-size: 19px*@factor;
     padding: 12px;
     letter-spacing: 0.5px;
     line-height: @line-height;
@@ -55,7 +49,7 @@ h1 {
     font-family:'Cabin';
     font-weight: normal;
     letter-spacing:3px;
-    font-size: 16px;
+    font-size: 16px*@factor;
     line-height: @line-height;
 }
 
@@ -67,14 +61,25 @@ h2 {
     font-size: 16px;
     line-height: @line-height;
 }
-
+//title in the CV:
+h3 {
+    font-family:'Cabin';
+    font-weight: normal;
+    letter-spacing:3px;
+    font-size: 16px;
+    line-height: @line-height;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    display:none;
+}
 //dates CV:
 h4 {
     font-family:'Cabin';
     font-weight: normal;
 //    margin-left: 30px;
     letter-spacing:3px;
-    font-size: 16px;
+    font-size: 16px*@factor;
     line-height: @line-height;
 }
 
@@ -100,19 +105,19 @@ a {
 /* COLUMNS LAYOUT */
 
 
-@col: 350px;
-@ext-margin: 10px;
-@gutter: 15px;
+@col: 350px*@factor;
+@ext-margin: 10px*@factor;
+@gutter: 15px*@factor;
 
 
 .white-box {
     background-color: white;
-    width: 9*@col + 2*@ext-margin;
+    width: 5*@col + 2*@ext-margin;
     padding: @ext-margin;
 }
 
 .col1 {
-    width: @col+5px;
+    width: (@col+5px) * @factor;
     padding: @gutter;
     float: left;
 }
@@ -124,31 +129,50 @@ a {
 }
 
 .col3 {
-    width: 560px;
+    width: 530px*@factor;
     float: left;
     padding-top: @gutter;
     padding-left: 2*@gutter;
 }
 
-// (images)
-.col4 {
-    width: 4*@col+15px;
-    float: left;
-    padding-top: @gutter;
-}
-
 .box-in-box {
     display: inline-block;
+    width: (@col+5px) * @factor;
 }
 
 .biox {
+    display: inline-block;
 }
 
-.IM {
+.box.IM {
     margin-left: -@gutter;
     margin-top: 5px;
     margin-bottom:-@gutter;
     display: inline-block;
+}
+
+// (images)
+
+
+.columns-images {
+    clear: both;
+    column-count: 2;
+    -moz-column-count: 2;
+    -webkit-column-count: 2;
+    column-gap: 50px;
+    -moz-column-gap: 50px;
+    -webkit-column-gap: 50px;
+}
+
+// styles the images’ div
+.divimages {
+    margin-bottom: 30px*@factor;
+}
+
+// styles the images
+.images {
+    width: 500px*@factor;
+    margin-bottom: 15px*@factor;
 }
 
 /*only on the screen*/
@@ -173,7 +197,21 @@ a {
     padding-bottom: 1.5*@line-height;
     display: inline-block;
 }
-
+// (images)
+    .col4 {
+        width: 1100px;
+        float: left;
+        padding-top: @gutter;
+        padding-left: 2*@gutter;
+    }
+    .img {
+        width: 320px*@factor;
+        margin-bottom: 15px*@factor;
+        margin-top: 15px*@factor;
+    }
+    .screen-only {
+      
+    }
 }
 
 /*only in print*/
@@ -191,5 +229,23 @@ a {
     /*page break*/
     .break {
         page-break-before: always;
+    }
+    // (images)
+    .col4 {
+        width: 510px/@factor;
+        float: left;
+        padding-top: @gutter/@factor;
+        padding-left: 2*@gutter/@factor;
+    }
+    .img {
+        width: 1.6*@col/@factor;
+        margin-bottom: 15px;
+        margin-top: 15px;
+    }
+    .box {
+        page-break-inside: avoid;
+    }
+    .print-only {
+      
     }
 }

@@ -41,12 +41,12 @@ if (Meteor.isClient) {
         },
     });
 
-var isExternal = function(href) {
-    if (href.indexOf("http") === -1 || href.indexOf(document.location.host) !== -1 || href.indexOf("localhost") !== -1 || href.indexOf("127.0.0.1") !== -1 ) {
-        return false;
-    }
-    return true;
-};
+    var isExternal = function(href) {
+        if (href.indexOf("http") === -1 || href.indexOf(document.location.host) !== -1 || href.indexOf("localhost") !== -1 || href.indexOf("127.0.0.1") !== -1 ) {
+            return false;
+        }
+        return true;
+    };
 
     // initialise le router
     var app = new Router;
@@ -86,7 +86,7 @@ var isExternal = function(href) {
                 var $this = $(this);
                 $this.hide();
                 if($this.prop("checked")) {
-                    var $image = $("<img src='/checkbox-crossed.png' />").insertAfter(this);
+                    var $image = $("<img src='/checkbox-crossed.svg' />").insertAfter(this);
                 } else {
                     var $image = $("<img src='/checkbox.png' />").insertAfter(this);
                 }
@@ -98,7 +98,7 @@ var isExternal = function(href) {
                 })
                 function checkImage(cat) {
                     if($image.prev("input").prop("checked")) {
-                        $image.attr("src", "/checkbox-crossed.png");
+                        $image.attr("src", "/checkbox-crossed.svg");
                         $('.' + cat).fadeIn();
                     } else {
                         $image.attr("src", "/checkbox.png");
@@ -108,6 +108,10 @@ var isExternal = function(href) {
                 }
                 
             });
+            
+            
+            $.imageOrder(selector);
+            
             
             // images CV
 /*              var $imageCV = $(".IM");
